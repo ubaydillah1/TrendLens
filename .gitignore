@@ -1,4 +1,3 @@
-# Ignored legacy / learning directories as requested
 fastapi/
 Golang-Learn/
 
@@ -29,3 +28,10 @@ Thumbs.db
 dist/
 build/
 *.egg-info/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+bin/
+
