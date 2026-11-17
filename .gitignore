@@ -1,3 +1,4 @@
+# Legacy / Playground directories
 fastapi/
 Golang-Learn/
 
@@ -24,7 +25,7 @@ __pycache__/
 .DS_Store
 Thumbs.db
 
-# Build Artifacts
+# Build Artifacts (Python & Go)
 dist/
 build/
 *.egg-info/
@@ -34,4 +35,3 @@ build/
 *.so
 *.dylib
 bin/
-
