@@ -1,6 +1,7 @@
 # Legacy / Playground directories
 fastapi/
 Golang-Learn/
+PROJECT_PLAN.md
 
 # Python & Virtual Environments
 .venv/
