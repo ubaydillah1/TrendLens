@@ -13,6 +13,7 @@ These guidelines govern how AI agents operate within the `trendlens` repository.
 
 ## 2. 📜 Standards & Guidelines Reference
 * **Git Standards:** Follow all rules in [git-standards.md](file:///c:/Users/Ubay%20Dillah/Documents/Pemrograman/On%20Going/trendlens/.agents/git-standards.md).
+* **Code Documentation & Comments:** Follow professional standards in [code-standards.md](file:///c:/Users/Ubay%20Dillah/Documents/Pemrograman/On%20Going/trendlens/.agents/code-standards.md).
 * **Python Backend Architecture:** Follow strict rules in [py-be/ARCHITECTURE_RULES.md](file:///c:/Users/Ubay%20Dillah/Documents/Pemrograman/On%20Going/trendlens/py-be/ARCHITECTURE_RULES.md).
 * **Project Roadmap:** Follow the phases outlined in [PROJECT_PLAN.md](file:///c:/Users/Ubay%20Dillah/Documents/Pemrograman/On%20Going/trendlens/PROJECT_PLAN.md).
 
