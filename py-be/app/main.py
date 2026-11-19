@@ -1,10 +1,11 @@
 """FastAPI application entrypoint and middleware configuration."""
 
-from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
 
 from app.api.v1.router import api_router
 from app.core.config import settings
+from fastapi import FastAPI
 
 
 def create_application() -> FastAPI:
@@ -12,9 +13,9 @@ def create_application() -> FastAPI:
     app = FastAPI(
         title=settings.PROJECT_NAME,
         version="1.0.0",
-        openapi_url=f"{settings.API_V1_STR}/openapi.json",
-        docs_url=f"{settings.API_V1_STR}/docs",
-        redoc_url=f"{settings.API_V1_STR}/redoc",
+        openapi_url="/openapi.json",
+        docs_url="/docs",
+        redoc_url="/redoc",
     )
 
     # Allow cross-origin requests from frontend and local microservices
@@ -29,13 +30,18 @@ def create_application() -> FastAPI:
     # Register centralized v1 API router
     app.include_router(api_router, prefix=settings.API_V1_STR)
 
+    @app.get("/api/v1/docs", include_in_schema=False)
+    async def redirect_api_docs() -> RedirectResponse:
+        """Redirects v1 docs path to standard swagger docs."""
+        return RedirectResponse(url="/docs")
+
     @app.get("/", summary="Root health & metadata status")
     async def root_index() -> dict[str, str]:
         """Provides basic metadata and links to API documentation."""
         return {
             "name": settings.PROJECT_NAME,
             "version": "1.0.0",
-            "docs": f"{settings.API_V1_STR}/docs",
+            "docs": "/docs",
         }
 
     return app
