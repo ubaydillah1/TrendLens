@@ -1,8 +1,7 @@
 """Central API router aggregating all v1 feature endpoints."""
 
-from fastapi import APIRouter
-
 from app.api.v1.endpoints import health, research
+from fastapi import APIRouter
 
 api_router = APIRouter()
 

@@ -22,5 +22,5 @@ def tech_fetch_node(state: ResearchAgentState) -> dict[str, Any]:
     if state.get("tech_news_raw"):
         return {"tech_news_raw": state["tech_news_raw"]}
 
-    live_news = fetch_top_tech_news(limit=8, min_points=25)
+    live_news = fetch_top_tech_news(limit=25, min_points=15)
     return {"tech_news_raw": live_news}

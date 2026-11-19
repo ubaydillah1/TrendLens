@@ -60,8 +60,8 @@ def query_planner_node(state: ResearchAgentState) -> dict[str, Any]:
     news_items = state.get("tech_news_raw") or []
     if news_items:
         formatted_news = "\n".join(
-            f"- {item.get('topic', '')} ({item.get('engagement_score', 0)} pts)"
-            for item in news_items[:8]
+            f"- [{item.get('source', 'Tech')}] {item.get('topic', '')} ({item.get('engagement_score', 0)} pts)"
+            for item in news_items[:20]
         )
     else:
         formatted_news = "No live news available; formulate queries based on evergreen niche dynamics."
