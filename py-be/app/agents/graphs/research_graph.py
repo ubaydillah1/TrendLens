@@ -17,20 +17,15 @@ workflow.add_node("fetch_tech_news", tech_fetch_node)
 workflow.add_node("fetch_viral_trends", viral_fetch_node)
 workflow.add_node("synthesis", synthesis_node)
 
-# Flow: START -> query_planner
-workflow.add_edge(START, "query_planner")
-
-# Parallel Fan-Out from query_planner:
-# 1. Fetch viral YouTube trends using dynamically planned search queries
-# 2. Concurrently fetch high-engagement Hacker News engineering debates
+# Flow:
+# 1. Fetch live tech news from Hacker News to anchor research in real events
+# 2. Query planner uses breaking news + creator persona to plan targeted YouTube searches
+# 3. Viral fetcher queries YouTube for live discussions and hooks matching the planned angles
+# 4. Synthesis node creates localized, actionable content ideas
+workflow.add_edge(START, "fetch_tech_news")
+workflow.add_edge("fetch_tech_news", "query_planner")
 workflow.add_edge("query_planner", "fetch_viral_trends")
-workflow.add_edge("query_planner", "fetch_tech_news")
-
-# Fan-In: Both ingestion streams must complete before synthesis begins
-workflow.add_edge("fetch_tech_news", "synthesis")
 workflow.add_edge("fetch_viral_trends", "synthesis")
-
-# Terminate workflow upon completing synthesis
 workflow.add_edge("synthesis", END)
 
 research_graph = workflow.compile()
