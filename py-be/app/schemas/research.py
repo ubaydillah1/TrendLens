@@ -38,3 +38,33 @@ class DailyResearchReport(BaseModel):
         description="The persona applied, e.g., 'Pragmatic Senior Engineer with sarcastic tone'"
     )
     ideas: list[ContentIdea] = Field(description="List of 8-12 curated content ideas")
+
+
+class ResearchRequest(BaseModel):
+    """Payload schema for triggering research pipeline execution."""
+
+    niche: str = Field(
+        default="AI & Software Engineering",
+        description="Primary content domain and technical focus",
+        examples=["AI & Software Engineering"],
+    )
+    user_positioning: str = Field(
+        default="Pragmatic Senior Backend Engineer, skeptical of AI hype, focuses on real architecture and cost efficiency",
+        description="Creator voice, tone, and strategic content perspective",
+        examples=[
+            "Pragmatic Senior Backend Engineer, skeptical of AI hype, focuses on real architecture and cost efficiency"
+        ],
+    )
+
+
+class ResearchResponse(BaseModel):
+    """Standard API response schema for synchronous research executions."""
+
+    success: bool = Field(default=True, description="Execution success indicator")
+    message: str = Field(
+        default="Research pipeline completed successfully",
+        description="Informational status message",
+    )
+    data: DailyResearchReport = Field(
+        description="Final synthesized research report and content ideas"
+    )

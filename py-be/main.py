@@ -1,8 +1,5 @@
-from fastapi import FastAPI
+"""Application root wrapper exporting the configured FastAPI application instance."""
 
-app = FastAPI()
+from app.main import app
 
-
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
+__all__ = ["app"]
