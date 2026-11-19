@@ -3,14 +3,17 @@
 from typing import Any
 
 from app.agents.states.research_state import ResearchAgentState
-from app.agents.tools.youtube_trends import search_youtube_trends
+from app.agents.tools.youtube_trends import (
+    extract_youtube_transcript,
+    search_youtube_trends,
+)
 
 
 def viral_fetch_node(state: ResearchAgentState) -> dict[str, Any]:
     """LangGraph node that ingests trending video metadata using planned search queries.
 
-    Executes search queries planned by the query planner, deduplicating videos
-    by URL to ensure diverse, high-performing coverage.
+    Executes search queries planned by the query planner, deduplicates videos
+    by URL, and extracts opening spoken transcript hooks for top candidates.
 
     Args:
         state: Current graph state containing 'search_queries' or fallback 'niche'.
@@ -18,7 +21,6 @@ def viral_fetch_node(state: ResearchAgentState) -> dict[str, Any]:
     Returns:
         Partial state dictionary updating 'viral_trends_raw'.
     """
-    # If raw trends are already provided (e.g. testing fixtures), preserve them
     if state.get("viral_trends_raw"):
         return {"viral_trends_raw": state["viral_trends_raw"]}
 
@@ -31,14 +33,22 @@ def viral_fetch_node(state: ResearchAgentState) -> dict[str, Any]:
     seen_urls: set[str] = set()
 
     for query in queries:
-        # Fetch top 2-3 videos per query to maintain diversity
         results = search_youtube_trends(query=query, limit=3)
+        query_top_hook_extracted = False
+
         for item in results:
             url = item.get("source_url")
             if url and url not in seen_urls:
                 seen_urls.add(url)
-                # Tag the query that led to this video discovery for transparency
                 item["discovered_via_query"] = query
+
+                # Extract the opening verbal hook for the first unique video per query
+                if not query_top_hook_extracted:
+                    item["transcript_hook"] = extract_youtube_transcript(url, max_words=80)
+                    query_top_hook_extracted = True
+                else:
+                    item["transcript_hook"] = None
+
                 collected_trends.append(item)
 
     return {"viral_trends_raw": collected_trends}

@@ -26,6 +26,8 @@ print("\n📹 3. Live YouTube Trends Ingested (Step 3 - Across Planned Queries):
 for item in result.get("viral_trends_raw", []):
     views = f"{item.get('views', 0):,}"
     print(f"  • [{item['platform']}] {item['title']} ({views} views) [Query: {item.get('discovered_via_query')}]")
+    if item.get("transcript_hook"):
+        print(f"    🗣️ Spoken Opening Hook: \"{item['transcript_hook'][:140]}...\"")
 
 print("\n🎯 4. Final Cross-Synthesized Report Generated (Step 4):")
 print(json.dumps(result["final_report"], indent=2, ensure_ascii=False))
