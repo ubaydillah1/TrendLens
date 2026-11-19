@@ -1,10 +1,12 @@
+import json
+
 from dotenv import find_dotenv, load_dotenv
 
 load_dotenv(find_dotenv())
 
 from app.agents.graphs.research_graph import research_graph
 
-# Sample mock input data
+# Input without tech_news_raw: the agent fetches live news automatically!
 sample_input = {
     "niche": "AI & Software Engineering",
     "user_positioning": "Pragmatic Senior Backend Engineer, skeptical of AI hype, focuses on real architecture and cost efficiency",
@@ -24,24 +26,14 @@ sample_input = {
             "source_url": "https://instagram.com/reel/sample2",
         },
     ],
-    "tech_news_raw": [
-        {
-            "source": "HackerNews",
-            "topic": "SQLite in production: Why companies are ditching PostgreSQL for embedded databases",
-            "url": "https://news.ycombinator.com/item?id=sample3",
-        },
-        {
-            "source": "GitHub Trending",
-            "topic": "Prompt caching in LLMs reduced latency and cost by 80%",
-            "url": "https://github.com/sample4",
-        },
-    ],
 }
 
-print("🚀 Running TrendLens Agent...")
+print("🚀 Running TrendLens Agent with LIVE Hacker News Ingestion...")
 result = research_graph.invoke(sample_input)
 
-print("\n🎯 Final Report Generated:")
-import json
+print("\n📰 Live Tech News Ingested by Agent:")
+for item in result.get("tech_news_raw", []):
+    print(f"  • [{item['source']}] {item['topic']} ({item.get('engagement_score', 0)} pts)")
 
+print("\n🎯 Final Cross-Synthesized Report Generated:")
 print(json.dumps(result["final_report"], indent=2))

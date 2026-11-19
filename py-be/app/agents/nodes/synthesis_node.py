@@ -4,7 +4,7 @@ from datetime import UTC, datetime
 from typing import Any
 
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_openai import ChatOpenAI
 
 from app.agents.states.research_state import ResearchAgentState
 from app.schemas.research import DailyResearchReport
@@ -53,11 +53,11 @@ def synthesis_node(state: ResearchAgentState) -> dict[str, Any]:
     Returns:
         Partial state dictionary updating 'final_report' with the validated payload.
     """
-    api_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
-    
-    # Using Gemini 3.5 Flash Lite for fast, resilient structured output generation
-    llm = ChatGoogleGenerativeAI(
-        model="gemini-3.5-flash-lite",
+    api_key = os.getenv("OPENAI_API_KEY") 
+
+    # Using GPT-4o-mini for reliable, low-cost structured synthesis
+    llm = ChatOpenAI(
+        model="gpt-4o-mini",
         temperature=0.7,
         api_key=api_key,
     )
