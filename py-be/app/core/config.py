@@ -1,6 +1,12 @@
 """Centralized configuration management for TrendLens AI service."""
 
+import os
+
+from dotenv import find_dotenv, load_dotenv
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+# Ensure .env is resolved regardless of whether execution starts from root or py-be
+load_dotenv(find_dotenv())
 
 
 class Settings(BaseSettings):
@@ -15,7 +21,7 @@ class Settings(BaseSettings):
     PORT: int = 8001
 
     model_config = SettingsConfigDict(
-        env_file=".env",
+        env_file=find_dotenv(),
         env_file_encoding="utf-8",
         case_sensitive=True,
         extra="ignore",

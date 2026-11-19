@@ -7,6 +7,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 
 from app.agents.states.research_state import ResearchAgentState
+from app.core.config import settings
 from app.schemas.research import DailyResearchReport
 
 SYNTHESIS_SYSTEM_PROMPT = """You are an elite Technical Content Strategist & Viral Creative Director.
@@ -59,7 +60,7 @@ def synthesis_node(state: ResearchAgentState) -> dict[str, Any]:
     Returns:
         Partial state dictionary updating 'final_report' with the validated payload.
     """
-    api_key = os.getenv("OPENAI_API_KEY") 
+    api_key = settings.OPENAI_API_KEY or os.getenv("OPENAI_API_KEY")
 
     # Using GPT-4o-mini for reliable, low-cost structured synthesis
     llm = ChatOpenAI(
