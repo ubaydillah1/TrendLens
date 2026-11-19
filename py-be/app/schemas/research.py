@@ -23,6 +23,12 @@ class ContentIdea(BaseModel):
     )
 
 
+class SearchQueries(BaseModel):
+    queries: list[str] = Field(
+        description="List of 3 diverse, high-intent YouTube search queries targeting different emotional angles"
+    )
+
+
 class DailyResearchReport(BaseModel):
     date: str = Field(description="ISO Date of generation")
     target_niche: str = Field(

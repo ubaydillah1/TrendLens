@@ -1,37 +1,29 @@
-import json
-
 from dotenv import find_dotenv, load_dotenv
+import json
 
 load_dotenv(find_dotenv())
 
 from app.agents.graphs.research_graph import research_graph
 
-# Input without tech_news_raw: the agent fetches live news automatically!
+# Autonomous input: Niche and Positioning only!
 sample_input = {
     "niche": "AI & Software Engineering",
     "user_positioning": "Pragmatic Senior Backend Engineer, skeptical of AI hype, focuses on real architecture and cost efficiency",
-    "viral_trends_raw": [
-        {
-            "platform": "YouTube",
-            "title": "Why Senior Devs Are Abandoning Microservices in 2026",
-            "views": 450000,
-            "hook_formula": "Contrarian / Exposing an industry regret",
-            "source_url": "https://youtube.com/watch?v=sample1",
-        },
-        {
-            "platform": "Instagram",
-            "title": "3 Mistakes that Cost Startups $50k in Cloud Bills",
-            "views": 210000,
-            "hook_formula": "Direct financial pain point / Warning hook",
-            "source_url": "https://instagram.com/reel/sample2",
-        },
-    ],
 }
 
-print("🚀 Running TrendLens Agent with LIVE Hacker News Ingestion...")
+print("🚀 Running TrendLens Planner-Worker Agent Pipeline...")
 result = research_graph.invoke(sample_input)
 
-print("\n📰 Live Tech News Ingested by Agent:")
+print("\n🧠 Dynamic Search Queries Planned by Agent:")
+for idx, q in enumerate(result.get("search_queries", []), 1):
+    print(f"  {idx}. \"{q}\"")
+
+print("\n📹 Live YouTube Trends Ingested (Across Planned Queries):")
+for item in result.get("viral_trends_raw", []):
+    views = f"{item.get('views', 0):,}"
+    print(f"  • [{item['platform']}] {item['title']} ({views} views) [Query: {item.get('discovered_via_query')}]")
+
+print("\n📰 Live Tech News Ingested:")
 for item in result.get("tech_news_raw", []):
     print(f"  • [{item['source']}] {item['topic']} ({item.get('engagement_score', 0)} pts)")
 

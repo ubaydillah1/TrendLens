@@ -23,6 +23,11 @@ Rules:
 - Provide 2-3 punchy, spoken-word hook variations for the first 3 seconds of a short-form video.
 - Outline 3-4 bullet points detailing the core content message.
 - Include real or provided source reference URLs for verification.
+
+Language & Localization Standards:
+- The final output (topic_title, viral_hooks, content_outline, why_it_works) MUST be written in natural, conversational, modern Indonesian (Bahasa Indonesia yang santai, lugas, dan persuasif untuk kreator tech).
+- The hooks must sound natural when spoken aloud on camera (e.g., "Lu kira...", "Stop buang-buang...", "Kenapa banyak yang nyesel...").
+- Keep standard software engineering terminology in original English (e.g., 'Nginx', 'RCE', 'cloud bills', 'microservices', 'prompt caching', 'monolith', 'Docker', 'latency').
 """
 
 SYNTHESIS_USER_PROMPT = """Generate today's content research report with the following context:

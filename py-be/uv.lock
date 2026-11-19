@@ -1059,6 +1059,7 @@ dependencies = [
     { name = "pydantic-settings" },
     { name = "python-dotenv" },
     { name = "sqlalchemy" },
+    { name = "yt-dlp" },
 ]
 
 [package.metadata]
@@ -1070,6 +1071,7 @@ requires-dist = [
     { name = "pydantic-settings", specifier = ">=2.16.3" },
     { name = "python-dotenv", specifier = ">=1.2.4" },
     { name = "sqlalchemy", specifier = ">=2.1.9" },
+    { name = "yt-dlp", specifier = ">=2026.10.26" },
 ]
 
 [[package]]
@@ -1971,6 +1973,15 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/73/34/91ba01abfbed272db14360fa1ade99e3c2c02339c760d7563ea6c0240261/xxhash-4.1.0-cp315-cp315t-win32.whl", hash = "sha256:386885a55f4e4583bc3bf7b4da07ab615e10623c67f8a0536c08ca17d0b122b4", size = 46305, upload-time = "2026-11-09T13:47:26.466Z" },
     { url = "https://files.pythonhosted.org/packages/61/0e/2a4984c2c4cbc68ca48bdaf007ddaf201bdf37658f99a4d1cb024cae39fd/xxhash-4.1.0-cp315-cp315t-win_amd64.whl", hash = "sha256:074f95f0284a9064cbbc2654c64c47bd3b3fb0a5fccd99abde2e315747622fab", size = 49200, upload-time = "2026-11-09T13:47:19.555Z" },
     { url = "https://files.pythonhosted.org/packages/31/8a/cd69f6589b3afa3848df6a87ecf771925674b8e277cfb6be8d402067548b/xxhash-4.1.0-cp315-cp315t-win_arm64.whl", hash = "sha256:2e9362dbb39fc1a63345404572542018d2165e42f97008d9440b93a2981698dd", size = 34821, upload-time = "2026-11-09T13:48:58.247Z" },
+]
+
+[[package]]
+name = "yt-dlp"
+version = "2026.10.26"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/83/31/4be3987022a6244550ab6a3afe45ad10ac10b5e5ab8874bd8eecc7f8b937/yt_dlp-2026.10.26.tar.gz", hash = "sha256:abe5c6b94c3b2f0560500add1c42e0a97641752743a5b65588ac2007a6e23eb6", size = 3048880, upload-time = "2026-10-26T22:25:26.931Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/7f/3d/16ea7d5638cf585991f2c5705e8083688dde633d32d0871f2404e0f4d827/yt_dlp-2026.10.26-py3-none-any.whl", hash = "sha256:a05c5b5d8562f7e8a62f5334348b406af4930d56d3a65f8021d14af0e22339ae", size = 3186201, upload-time = "2026-10-26T22:25:24.877Z" },
 ]
 
 [[package]]
